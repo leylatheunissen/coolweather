@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>New York</h1>
+        <div class="temperature">76</div>
+        <p class="real-feel">Real Feel: 72</p>
+
+        <div class="favorites">
+            <div class="favorite-item"> <span>6</span> <p>UV Index</p> </div>
+            <div class="favorite-item"> <span>10</span> <p>Wind (mph)</p> </div>
+            <div class="favorite-item"> <span>6:28a</span> <p>Sunrise</p> </div>
+            <div class="favorite-item"> <span>7:52p</span> <p>Sundown</p> </div>
+        </div>
+
+        <div class="charts">
+            <p>Temperature</p>
+            <canvas id="temperatureChart"></canvas>
+        
+            <p>Precipitation</p>
+            <canvas id="precipitationChart"></canvas>
+        </div>
+
+        <div class="other-info">
+            <div class="other-item"> <span>70%</span> <p>Humidity</p> </div>
+            <div class="other-item"> <span>5</span> <p>Air Quality</p> </div>
+            <div class="other-item"> <span>5%</span> <p>Precip.</p> </div>
+            <div class="other-item"> <span>85%</span> <p>Cloud Cover</p> </div>
+        </div>
+
+        <div class="radar">
+            <p>Radar</p>
+            <img src="newyork.jpg" alt="Radar Image">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Sample time labels for the day (e.g., hourly)
+            const timeLabels = ["6 AM", "9 AM", "12 PM", "3 PM", "6 PM", "9 PM"];
+
+            // Sample data for temperature (°F), precipitation probability (%), and UV index
+            const temperatureData = [55, 60, 72, 75, 70, 65];
+            const precipitationData = [10, 20, 15, 5, 0, 10];
+
+            // Function to create line charts
+            function createChart(ctx, label, data) {
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: timeLabels,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            borderColor: "darkblue",
+                            backgroundColor: "rgba(0,0,0,0)",
+                            borderWidth: 2,
+                            pointRadius: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true, 
+                        scales: {
+                            x: { grid: { display: false, color: "rgba(0,0,0,0)" } },
+                            y: { beginAtZero: false, color: "rgba(0,0,0,0)"}
+                        },
+                        plugins: {
+                            legend: { display: false, color: "rgba(0,0,0,0)" }
+                        },
+                        layout: {
+                            padding: 5
+                        }
+                    }
+                });
+            }
+
+            // Get canvas elements
+            const temperatureCtx = document.getElementById("temperatureChart").getContext("2d");
+            const precipitationCtx = document.getElementById("precipitationChart").getContext("2d");
+            // Create charts
+            createChart(temperatureCtx, "Temperature (°F)", temperatureData, "red");
+            createChart(precipitationCtx, "Precipitation (%)", precipitationData, "blue");        });
+    </script>
+</body>
+</html>

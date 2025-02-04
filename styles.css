@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #87CEFA;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.weather-container {
+    width: 320px;
+    margin: 10px auto;
+    background: #2E9AFE;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.temperature {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.real-feel {
+    font-size: 14px;
+}
+
+.favorites, .other-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.favorite-item, .other-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.favorite-item span, .other-item span {
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    color: #2E9AFE;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.charts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    margin: 3px 0;
+}
+
+canvas {
+    max-width: 100%;
+    height: 40px;
+    width: 180px;
+    background: white;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.radar img {
+    width: 100%;
+    border-radius: 10px;
+}
+

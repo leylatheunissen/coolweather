@@ -1,25 +1,34 @@
+<!--
+   I used ChatGPT to help me generate the HTML and CSS code for the weather app. I have inserted comments to explain the code,
+   both for my own understanding and for the understanding of the reviewer. Also using ChatGPT, I was able to learn how to 
+   use Chart.js to create line charts for temperature and precipitation probability, and the canvas element to display the charts.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>CoolWeather</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Main container for the entire home page -->
     <div class="weather-container">
         <h1>New York</h1>
         <div class="temperature">76</div>
         <p class="real-feel">Real Feel: 72</p>
 
+         <!-- Class for the bubbles below the temperature feature -->
         <div class="favorites">
             <div class="favorite-item"> <span>6</span> <p>UV Index</p> </div>
             <div class="favorite-item"> <span>10</span> <p>Wind (mph)</p> </div>
             <div class="favorite-item"> <span>6:28a</span> <p>Sunrise</p> </div>
             <div class="favorite-item"> <span>7:52p</span> <p>Sundown</p> </div>
         </div>
-
+        
+         <!-- Two canvas elements -- one for temperature, one for precipitation -->
         <div class="charts">
             <p>Temperature</p>
             <canvas id="temperatureChart"></canvas>
@@ -42,25 +51,26 @@
     </div>
 
     <script>
+        // JavaScript code to create line charts using Chart.js
         document.addEventListener("DOMContentLoaded", function () {
-            // Sample time labels for the day (e.g., hourly)
+            // Time labels at 3 hour intervals for the day
             const timeLabels = ["6 AM", "9 AM", "12 PM", "3 PM", "6 PM", "9 PM"];
 
-            // Sample data for temperature (°F), precipitation probability (%), and UV index
+            // Sample data for temperature and precipitation probability
             const temperatureData = [55, 60, 72, 75, 70, 65];
             const precipitationData = [10, 20, 15, 5, 0, 10];
 
             // Function to create line charts
             function createChart(ctx, label, data) {
                 new Chart(ctx, {
-                    type: "line",
+                    type: "line", // Line chart for temperature and precipitation
                     data: {
                         labels: timeLabels,
                         datasets: [{
                             label: label,
                             data: data,
                             borderColor: "darkblue",
-                            backgroundColor: "rgba(0,0,0,0)",
+                            backgroundColor: "rgba(0,0,0,0)", // Transparent background
                             borderWidth: 2,
                             pointRadius: 3
                         }]
@@ -85,9 +95,10 @@
             // Get canvas elements
             const temperatureCtx = document.getElementById("temperatureChart").getContext("2d");
             const precipitationCtx = document.getElementById("precipitationChart").getContext("2d");
-            // Create charts
-            createChart(temperatureCtx, "Temperature (°F)", temperatureData, "red");
-            createChart(precipitationCtx, "Precipitation (%)", precipitationData, "blue");        });
+            
+            // Call function to create charts
+            createChart(temperatureCtx, "Temperature (°F)", temperatureData);
+            createChart(precipitationCtx, "Precipitation (%)", precipitationData);        });
     </script>
 </body>
 </html>
